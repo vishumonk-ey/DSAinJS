@@ -1,0 +1,27 @@
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+// tortoise and hare algorithm---> 
+// -two pointer method 
+// -fast two times next kiya because agar jyaada krunga to we cant handle the null case
+var hasCycle = function(head) {
+  let slow=head
+  let fast = head
+//   if(!head)return false
+//   if(head.next==null) return false
+  while((fast!=null && fast.next!=null)){
+    fast=fast.next.next
+    slow=slow.next
+    if(fast==slow) return true
+  }
+  return false
+};
