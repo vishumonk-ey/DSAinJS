@@ -1,0 +1,23 @@
+class Solution {
+    // Function to find the length of a loop in the linked list.
+    countNodesinLoop(head) {
+        let slow=head
+        let fast=head
+        let count=0
+        while(fast!=null && fast.next!=null){
+            slow=slow.next
+            fast=fast.next.next
+            if(slow==fast){
+//agar simple while loop lagata to starting me hi condition wouldnt have worked
+                do{
+                    slow=slow.next
+                    count++
+                }while(slow!=fast)
+                return count
+            }
+        }
+        return 0
+    }
+}
+
+->jaise hi slow and fast meet kiye fast ko vhi rakha and slow ko ek ek se aage badhaya and when they meet together one total cycle will be completed
