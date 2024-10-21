@@ -1,0 +1,49 @@
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {boolean}
+ */
+var isPalindrome = function(head) {
+    if(!head) return false
+   let slow=head
+   let fast=head
+   while(fast.next!=null && fast.next.next!=null ){
+//keep in mind when two conditions , keep the condition which can cause error in last 
+        slow=slow.next
+        fast=fast.next.next
+   }
+   let rHead=reverse(slow.next)
+   let ltemp=head
+   let rtemp=rHead
+   while(rtemp!=null){
+        if(ltemp.val!=rtemp.val)return false
+        ltemp=ltemp.next
+        rtemp=rtemp.next
+   }
+   reverse(rHead)
+   return true
+
+
+};
+
+function reverse(head){
+    let prev=null
+    let curr=head
+    let nxt
+    while(curr!=null){
+        nxt=curr.next
+        curr.next=prev
+        prev=curr
+        curr=nxt
+        
+    }
+    head=prev
+    return prev 
+}
+//when to reduce space commplexity we can try modifying the original ds and then return it back 
