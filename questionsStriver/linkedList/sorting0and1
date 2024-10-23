@@ -1,0 +1,48 @@
+
+// User function Template for javascript
+
+/**
+ * @param {Node} head
+ * @returns {Node}
+ */
+
+/*
+class Node{
+    constructor(data){
+        this.data = data;
+        this.next = null;
+    }
+}
+*/
+
+class Solution {
+    // Function to sort a linked list of 0s, 1s and 2s.
+    segregate(head) {
+        if(!head || head.next==null)return head
+        let zHead=new Node(-1)
+        let oHead=new Node(-1)
+        let tHead=new Node(-1)
+        let zero=zHead
+        let one=oHead
+        let two=tHead
+        let temp=head
+        while(temp!=null){
+            if(temp.data==0){
+                zero.next=temp
+                zero=zero.next
+            }else if(temp.data==1){
+                one.next=temp
+                one=one.next
+            }else{
+                two.next=temp
+                two=two.next
+            }
+            temp=temp.next
+        }
+// importanttt dhyaan de niche vala
+        zero.next=(oHead.next)?oHead.next:tHead.next
+        one.next=tHead.next
+        two.next=null
+        return zHead.next
+    }
+}
