@@ -28,3 +28,5 @@ console.log(`time->${t2-t1}`);
 //  4) In a loop,complexity of the loop is length of loop times the complexity of whatever happening inside.
 
 // Big O takes reference of number of operations which the computer had to do in an algo. thus it doesnt depends upon hardware of comp
+////time complexity--:
+//har ek loop ka individual worst case consider kar and then finally add all of them!
