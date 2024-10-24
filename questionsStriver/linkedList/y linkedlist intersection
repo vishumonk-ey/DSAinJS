@@ -1,0 +1,60 @@
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+
+// const { head } = require("request");
+
+/**
+ * @param {ListNode} headA
+ * @param {ListNode} headB
+ * @return {ListNode}
+ */
+var getIntersectionNode = function(headA, headB) {
+    if(!headB || !headA)return null
+    let tempA=headA
+    let tempB=headB
+    let lenA=0
+    let lenB=0
+    while(tempA!=null){
+        tempA=tempA.next
+        lenA++
+    }
+    while(tempB!=null){
+        tempB=tempB.next
+        lenB++
+    }
+    if(lenA>lenB){
+        tempA=headA
+        for(let i=0;i<lenA-lenB;i++){
+            tempA=tempA.next
+        }
+        tempB=headB
+        while(tempA!=null){
+            if(tempA==tempB){
+                return tempA
+            }
+            tempA=tempA.next
+            tempB=tempB.next
+        }
+    }else{
+        tempB=headB
+        for(let i=0;i<lenB-lenA;i++){
+            tempB=tempB.next
+        }
+        tempA=headA
+        while(tempA!=null){
+            if(tempA==tempB && tempA!=null){
+                return tempA
+            }
+            tempA=tempA.next
+            tempB=tempB.next
+        }
+    }
+    return null
+};
+//time complexity--:
+har ek loop ka individual worst case consider kar and then finally add all of them!
