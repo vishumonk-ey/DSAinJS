@@ -1,0 +1,20 @@
+//backtrackingggg--:
+//sabse pehle last tk gye fir vaha se add krna start kiya
+function helper(temp) {
+    if (!temp) return 1
+    carry = helper(temp.next)
+    temp.data += carry
+    if (temp.data < 10) return 0
+    temp.data = 0
+    return 1
+}
+function addOne(head) {
+    // Write your code here.
+    carry = helper(head)
+    if (carry) {
+        let newNode = new Node(1)
+        newNode.next = head
+        head = newNode
+        return head
+    }
+}
