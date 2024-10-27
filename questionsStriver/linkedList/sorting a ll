@@ -1,0 +1,43 @@
+function quickSort(left,right){
+    if(left==right)return left
+    let pivotNode=pivotHelper(left,right)
+    //for sorting left
+    quickSort(left,pivotNode)
+    //for sorting right
+    quickSort(pivotNode.next,right)
+    return left
+}
+function pivotHelper(start,end){
+    pivotElmnt=start.val
+    pivotNode=start
+    let temp=pivotNode.next
+    while(temp!=null && temp!=end){
+        if(temp.val<=pivotElmnt){
+            pivotNode=pivotNode.next
+            swapValue(pivotNode,temp)
+        }
+        temp=temp.next
+    }
+    swapValue(start,pivotNode)
+    return pivotNode
+}
+function swapValue(node1,node2){
+    let temp=node1.val
+    node1.val=node2.val
+    node2.val=temp
+}
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val, next) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.next = (next===undefined ? null : next)
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+var sortList = function(head) {
+    return quickSort(head,null)
+};
