@@ -1,0 +1,42 @@
+/**
+ * @param {number[]} nums1
+ * @param {number[]} nums2
+ * @return {number[]}
+ */
+var nextGreaterElement = function (nums1, nums2) {
+  // let resultArr = [];
+  // for (let i = 0; i < nums1.length; i++) {
+  //   let indx = nums2.indexOf(nums1[i]);
+  //   indx++;
+  //   while (indx < nums2.length) {
+  //     if (nums2[indx] > nums1[i]) {
+  //       resultArr.push(nums2[indx]);
+  //       break;
+  //     }
+  //     indx++;
+  //   }
+  //   if (indx == nums2.length) {
+  //     resultArr.push(-1);
+  //   }
+  // }
+  // return resultArr;
+  let resultArr = [];
+  let map = new Map();
+  let stack = [];
+  for (let i = nums2.length - 1; i >= 0; i--) {
+    let elmnt = nums2[i];
+    while (stack.length != 0 && stack[stack.length - 1] <= elmnt) {
+      stack.pop();
+    }
+    if (stack.length == 0) {
+      map.set(elmnt, -1);
+    } else {
+      map.set(elmnt, stack[stack.length - 1]);
+    }
+    stack.push(elmnt);
+  }
+  for (let i = 0; i < nums1.length; i++) {
+    resultArr.push(map.get(nums1[i]));
+  }
+  return resultArr;
+};
