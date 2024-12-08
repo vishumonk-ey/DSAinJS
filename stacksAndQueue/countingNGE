@@ -1,0 +1,18 @@
+
+class Solution
+{
+    //Function to count the next greater elements.
+    count_NGEs(N, arr, queries, indices)
+    {
+        let resultArr=[]
+        for(let i=0;i<queries;i++){
+            let elmnt=arr[indices[i]]
+            let count=0
+            for(let j=indices[i]+1 ; j<N ;j++){
+                if(arr[j]>elmnt)count++
+            }
+            resultArr.push(count)
+        }
+        return resultArr
+    }
+}
