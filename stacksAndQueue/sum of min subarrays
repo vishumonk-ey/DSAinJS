@@ -1,0 +1,16 @@
+//brute force
+/**
+ * @param {number[]} arr
+ * @return {number}
+ */
+var sumSubarrayMins = function(arr) {
+    let sum=0
+    for(let i=0;i<arr.length;i++){
+        min=arr[i]
+        for(let j=i;j<arr.length;j++){
+            min=Math.min(min,arr[j])
+            sum+=min
+        }
+    }
+    return sum %(1e9+7)
+};
