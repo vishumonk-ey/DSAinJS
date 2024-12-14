@@ -1,0 +1,78 @@
+/**
+ * @param {character[][]} matrix
+ * @return {number}
+ */
+var maximalRectangle = function (matrix) {
+  if (matrix.length == 0) return null;
+  const rows = matrix.length;
+  const cols = matrix[0].length;
+  let max = 0;
+  let arr = new Array(cols).fill(0);
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      if (matrix[i][j] == 0) {
+        arr[j] = 0;
+      } else {
+        arr[j] += 1;
+      }
+    }
+    let area = largestAreaInHistogram(arr);
+    max = Math.max(area, max);
+  }
+  return max;
+};
+
+function largestAreaInHistogram(heights) {
+  let pse = findPSE(heights);
+  let nse = findNSE(heights);
+  let max=0
+  for (let i = 0; i < heights.length; i++) {
+        let width=nse[i]-pse[i]-1
+        let area= width * heights[i]
+        max=Math.max(area,max)
+  }
+  return max
+}
+
+function findNSE(arr){
+    let stack=[]
+    let resultArr=[]
+    for(let i=arr.length-1;i>=0;i--){
+        while(stack.length!=0 && arr[stack[stack.length-1]]>=arr[i]){
+            stack.pop()
+        }
+        if(stack.length==0){
+            resultArr.push(arr.length)
+        }else{
+            resultArr.push(stack[stack.length-1])
+        }
+        stack.push(i)
+    }
+    reverse(resultArr)
+    return resultArr
+}
+function findPSE(arr){
+    let stack=[]
+    let resultArr=[]
+    for(let i=0;i<arr.length;i++){
+        while(stack.length!=0 && arr[stack[stack.length-1]]>=arr[i]){
+            stack.pop()
+        }
+        if(stack.length==0){
+            resultArr.push(-1)
+        }else{
+            resultArr.push(stack[stack.length-1])
+        }
+        stack.push(i)
+    }
+    return resultArr
+
+
+}
+function reverse(arr){
+    for(let i=0;i<Math.floor(arr.length/2);i++){
+        let temp=arr[i]
+        arr[i]=arr[arr.length-1-i]
+        arr[arr.length-1-i]=temp
+    }
+}
