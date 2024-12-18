@@ -1,0 +1,75 @@
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number[]}
+ */
+class node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+    this.prev = null;
+  }
+}
+class dequeue {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+  push(val) {
+    let newNode = new node(val);
+    if (this.length == 0) {
+      this.head = newNode;
+      this.tail = newNode;
+    } else {
+      this.tail.next = newNode;
+      newNode.prev = this.tail;
+      this.tail = newNode;
+    }
+    this.length++;
+  }
+  pop() {
+    if (this.length == 0) return null;
+    let toRemove = this.tail;
+    if (this.length == 1) {
+      this.head = null;
+      this.tail=null
+    } else {
+      toRemove.prev.next = null;
+      this.tail = toRemove.prev;
+      toRemove.prev = null;
+    }
+    this.length--;
+    return toRemove;
+  }
+  remove() {
+    if (this.length == 0) return null;
+    let toRemove = this.head;
+    if (this.length == 1) {
+      this.pop();
+    } else {
+      toRemove.next.prev = null;
+      this.head = toRemove.next;
+      toRemove.next = null;
+      this.length--;
+    }
+    return toRemove;
+  }
+}
+var maxSlidingWindow = function (nums, k) {
+  let dq = new dequeue();
+  let resultArr = [];
+  for (let i = 0; i < nums.length; i++) {
+    while (dq.length != 0 && nums[dq.tail.val] < nums[i]) {
+      dq.pop();
+    }
+    dq.push(i);
+    if (i >= k - 1) {
+      if (i - dq.head.val == k) dq.remove();
+      resultArr.push(nums[dq.head.val]);
+    }
+  }
+
+  return resultArr;
+};
+
