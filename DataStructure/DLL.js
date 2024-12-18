@@ -28,7 +28,10 @@ class DoublyLinkedList {
   pop() {
     if (this.length === 0) return null;
     let toRemove = this.tail;
-    if (this.length === 1) this.head = null;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail=null
+    }
     else {
       toRemove.prev.next = null;
       this.tail = toRemove.prev;
