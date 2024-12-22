@@ -1,0 +1,20 @@
+class Solution {
+    // Function to return the ceil of given number in BST.
+    findCeil(root, input) {
+       if(root===null)return null
+       let ceil=-1
+       let curr=root
+       while(curr!=null){
+           if(curr.data==input){
+               ceil=curr.data
+               return ceil
+           }else if(curr.data > input){
+               ceil=curr.data
+               curr=curr.left
+           }else{
+               curr=curr.right
+           }
+       }
+       return ceil
+    }
+}
