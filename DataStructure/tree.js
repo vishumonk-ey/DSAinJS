@@ -76,8 +76,28 @@ class BinarySearchTree{
             }
         }
     }
+    BFS(){
+        let queue=[]
+        let resultArr=[]
+        queue.push(this.root)
+        while(queue.length!=0){
+            let node=queue.shift()
+            resultArr.push(node.val)
+            if(node.left) queue.push(node.left)
+            if(node.right) queue.push(node.right)
+        }
+    return resultArr
+    }
 }
 //average time complexity of insert/search is O(log n)-->we consider avg case when our tree is almost balanced.. agar mai size double krdunga to bass ek step badhega-->logn
 //best case of inserting/searching is O(1)
 //worst case of inserting/searching is O(n)-->skewed bst-->bass ek trf
 
+let tree=new BinarySearchTree()
+tree.insert(10)
+tree.insert(6)
+tree.insert(15)
+tree.insert(3)
+tree.insert(8)
+tree.insert(20)
+console.log(tree.BFS())
