@@ -2,28 +2,58 @@
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
+
  */
+// var searchRange = function(nums, target) {
+//     let left = 0
+//     let right = nums.length - 1
+//     let start = -1
+//     let end = -1
+//     //for start point
+//     while ( left<=right ){
+//         let mid = Math.floor((left + right)/2)
+//         if (nums[mid] >= target){
+//             right = mid - 1
+//         }else{
+//             left = mid + 1
+//         }
+//     }
+//     start = left < nums.length && nums[left] == target ? left : -1
+//     //for end point 
+//      left = 0
+//      right = nums.length - 1
+//      while ( left<=right ){
+//         let mid = Math.floor((left + right)/2)
+//         if (nums[mid] <= target){
+//             left = mid + 1
+//         }else{
+//             right = mid - 1
+//         }
+//     }
+//     end = (right >= 0) && (nums[right] == target) ? right : -1
+//     return [start , end]
+// };
 var searchRange = function(nums, target) {
+    return [foundPosition(nums,target,true) , foundPosition(nums,target,false)]
+}
+var foundPosition = function (nums,target,isFirst){
     let left = 0
     let right = nums.length - 1
-    let start = -1
-    let end = -1
-    while (left <= right){
+    let result = -1
+    while (left<=right){
         let mid = Math.floor((left + right)/2)
-        if(nums[mid] == target){
-            let left1 = left
-            let right1 = mid 
-            // for sp
-                while(left1<=right1){
-                    const mid1= Math.floor((left1 + right1)/2)
-                    if(nums[mid]==)
-                }
-        }else if( nums[mid] > target){
-            right = mid - 1
+        if(nums[mid]===target){
+            result = mid
+            if (isFirst){
+                right = mid - 1
+            }else{
+                left = mid + 1
+            }
+        }else if(nums[mid]<target){
+            left = mid +1 
         }else {
-            left = mid + 1
+            right = mid - 1
         }
-    }
-    return [start , end]
-};
-// did this midway but this is wrong as inside the equality check it is not correctly handling the start and end position as i though of applying binary search only once for left and once for right
+    } 
+    return result
+}
