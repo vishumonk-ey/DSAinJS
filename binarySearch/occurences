@@ -1,0 +1,118 @@
+// Binary search -:
+// for sorted data only.
+function binarySearch(arr, x) {
+  let l = 0;
+  let r = arr.length - 1;
+  if(arr.length === 0){
+    return false
+  }
+  while (r >= l) {
+    const k = Math.floor((l + r) / 2);
+    if (arr[k] == x) {
+      return k;
+    }
+    if (arr[k] > x) {
+      r = k - 1;
+    } else {
+      l = k + 1;
+    }
+  }
+  return false;
+}
+// jumping approach - :
+function binaryJumpSearch(arr,x){
+    let k = 0;
+    for (let b = Math.floor(arr.length / 2) ; b>=1 ; b/=2){
+        while(k+b < arr.length && arr[k+b] <= x) {
+            k= k+b
+        }
+    } 
+    if(arr[k] === x ){
+        return k
+    }else{
+        return false
+    }
+} 
+function smallestK(){
+    let left = 0
+    let right = x //x is a value for which i know the function is true 
+    let mid = (left + right)/2
+    while (left<=right){
+        if(!ok(mid)){
+            left = mid+1
+        }else{
+            right = mid - 1
+        }
+    }
+    return left
+}
+// similarly largestK can be done , monotonic koi data hai ya sorted hai then binary seach can be thought
+
+
+/**
+ * @param {number[]} nums
+ * @param {number} target
+ * @return {number[]}
+
+ */
+// var searchRange = function(nums, target) {
+//     let left = 0
+//     let right = nums.length - 1
+//     let start = -1
+//     let end = -1
+//     //for start point
+//     while ( left<=right ){
+//         let mid = Math.floor((left + right)/2)
+//         if (nums[mid] >= target){
+//             right = mid - 1
+//         }else{
+//             left = mid + 1
+//         }
+//     }
+//     start = left < nums.length && nums[left] == target ? left : -1
+//     //for end point 
+//      left = 0
+//      right = nums.length - 1
+//      while ( left<=right ){
+//         let mid = Math.floor((left + right)/2)
+//         if (nums[mid] <= target){
+//             left = mid + 1
+//         }else{
+//             right = mid - 1
+//         }
+//     }
+//     end = (right >= 0) && (nums[right] == target) ? right : -1
+//     return [start , end]
+// };
+var searchRange = function(nums, target) {
+  let startingPt = foundPosition(nums,target,true)
+  let endPt = foundPosition(nums,target,false)
+  let occurences
+  if (startingPt == -1){
+      occurences = 0
+  }else{
+      occurences = endPt - startingPt + 1
+  }
+  return occurences
+}
+var foundPosition = function (nums,target,isFirst){
+  let left = 0
+  let right = nums.length - 1
+  let result = -1
+  while (left<=right){
+      let mid = Math.floor((left + right)/2)
+      if(nums[mid]===target){
+          result = mid
+          if (isFirst){
+              right = mid - 1
+          }else{
+              left = mid + 1
+          }
+      }else if(nums[mid]<target){
+          left = mid +1 
+      }else {
+          right = mid - 1
+      }
+  } 
+  return result
+}
