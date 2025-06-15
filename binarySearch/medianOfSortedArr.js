@@ -24,3 +24,57 @@ var findMedianSortedArrays = function(nums1, nums2) {
     if (totalNum % 2 == 0) return ((Math.max(l1,l2) + Math.min(r1,r2))/2)
     return Math.min(r1,r2)
 }
+// Linear search approach 
+
+
+var findMedianSortedArrays = function(nums1, nums2) {
+    if (nums1.length == 0 && nums2.length ==0)return 0
+    let i =0
+    let j = 0
+    let count = 0
+    let totalLen = nums1.length + nums2.length 
+    let firstInd = Math.floor(totalLen/2) - 1
+    let secondInd = Math.floor(totalLen/2)
+    let firstEl,secondEl 
+    while(i<nums1.length && j < nums2.length && count <= secondInd ){
+        if(nums1[i] < nums2[j]){
+            if(count == firstInd){
+                firstEl = nums1[i]
+            }else if ( count == secondInd){
+                secondEl = nums1[i]
+            }
+            count++
+            i++
+        }else{
+            if(count == firstInd){
+                firstEl = nums2[j]
+            }else if(count == secondInd){
+                secondEl = nums2[j]
+            }
+            count++
+            j++
+        }
+    }
+    if ( count <= secondInd){
+        while ( i< nums1.length ){
+            if(count === firstInd){
+                firstEl = nums1[i]
+            }else if (count == secondInd){
+                secondEl = nums1[i]
+            }
+            count++
+            i++
+        }
+        while ( j < nums2.length){
+            if ( count == firstInd){
+                firstEl = nums2[j]
+            }else if (count == secondInd){
+                secondEl = nums2[j]
+            }
+            count++
+            j++
+        }
+    }
+    if (totalLen % 2 === 0) return (firstEl + secondEl)/2
+    return secondEl
+};
