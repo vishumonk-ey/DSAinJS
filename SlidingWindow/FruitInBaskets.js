@@ -55,7 +55,10 @@ var totalFruit = function(fruits) {
     for(let right = 0 ; right < fruits.length ; right++){
         let freq = map.get(fruits[right]) || 0
         map.set(fruits[right] , ++freq)
-        const typeCount = Object.entries(map).length
+        const typeCount = map.size
+        console.log(typeCount)
+        console.log(map)
+
         if(typeCount > 2){
             let freqLeft = map.get(fruits[left])
             map.set(fruits[left],--freqLeft)
