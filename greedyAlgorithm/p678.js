@@ -12,27 +12,49 @@
  * @return {boolean}
  */
 var checkValidString = function (s) {
-  return checkString(s, 0, 0);
-};
-function checkString(s, cnt = 0, i = 0) {
-  while (i < s.length) {
-    if (s[i] == "(") {
-      cnt++;
-    } else if (s[i] == ")") {
-      cnt--;
-    } else {
-      const isLP = checkString(s, ++cnt, i + 1);
-      if (isLP) return true;
-      const isRP = checkString(s, --cnt, i + 1);
-      if (isRP) return true;
-      const isEM = checkString(s, cnt, i + 1);
-      if (isEM) return true;
+  let min = 0
+  let max = 0
+  for(let i = 0 ; i < s.length ; i++ ){
+    if (s[i] == "("){
+      min++
+      max++
+    }else if ( s[i] == ")"){
+      min--
+      if(min < 0){
+        min = 0
+      }
+      max--
+      if ( max < 0) return false
+    }else{
+      min-- 
+      if (min < 0){
+        min = 0
+      }
+      max++
     }
-    if(cnt < 0)return false
-    i++
-  }
-  if(cnt == 0)return true
-  return false
-}
 
-console.log(checkValidString("((*)(*)"))
+  }
+  return (min == 0)
+};
+// function checkString(s, cnt = 0, i = 0) {
+//   while (i < s.length) {
+//     if (s[i] == "(") {
+//       cnt++;
+//     } else if (s[i] == ")") {
+//       cnt--;
+//     } else {
+//       const isLP = checkString(s, cnt + 1, i + 1);
+//       if (isLP) return true;
+//       const isRP = checkString(s, cnt - 1, i + 1);
+//       if (isRP) return true;
+//       const isEM = checkString(s, cnt, i + 1);
+//       if (isEM) return true;
+//     }
+//     if(cnt < 0)return false
+//     i++
+//   }
+//   if(cnt == 0)return true
+//   return false
+// }
+
+// console.log(checkValidString("((*)(*)"))
