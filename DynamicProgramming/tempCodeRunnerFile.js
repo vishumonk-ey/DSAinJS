@@ -1,1 +1,1 @@
-i - arr[j]
+f( n == 0 ) return 0

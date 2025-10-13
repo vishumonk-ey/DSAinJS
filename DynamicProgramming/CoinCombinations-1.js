@@ -3,27 +3,27 @@
 
 // 2+2+5
 
-function solve(arr , target){
-    const dp = new Array(target+1).fill(-1)
-    console.log(totalWays(arr,target,dp));
-    console.log(dp);
-    
+function solve(arr, target) {
+  const dp = new Array(target + 1).fill(-1);
+  console.log(totalWays(arr, target, dp));
+  // console.log(dp);
 }
-function totalWays(arr , i , dp){
-    if ( i < 0){
-        return 0
-    }
-    if(i == 0){
-        return 1
-    }
-    if ( dp[i] != -1){
-        return dp[i]
-    }
-    dp[i] = 0 
-    for(let k = 0 ; k < arr.length ; k++ ){
-        dp[i] += totalWays(arr,i-arr[k],dp)
-    }
-    return dp[i]
+function totalWays(arr, i, dp) {
+  const mod = 1e9 + 7;
+  if (i < 0) {
+    return 0;
+  }
+  if (i == 0) {
+    return 1;
+  }
+  if (dp[i] != -1) {
+    return dp[i];
+  }
+  dp[i] = 0;
+  for (let k = 0; k < arr.length; k++) {
+    dp[i] = (dp[i] + totalWays(arr, i - arr[k], dp)) % mod;
+  }
+  return dp[i];
 }
 
-solve([2,3,5] , 9)
+solve([2, 3, 5], 1115);
