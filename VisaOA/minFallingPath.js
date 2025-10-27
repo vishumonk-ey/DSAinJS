@@ -4,7 +4,7 @@
  */
 var minFallingPathSum = function (matrix) {
   const n = matrix.length;
-  const dp = new Array(n).fill(new Array(n).fill(Number.MAX_SAFE_INTEGER));
+  const dp = Array.from({length : n } , () => new Array(n).fill(Number.MAX_SAFE_INTEGER));
   const minPathSum = (i, j) => {
     if (j < 0 || j >= n) return Number.MAX_SAFE_INTEGER;
     if (i === n - 1) return matrix[i][j];
@@ -27,3 +27,36 @@ var minFallingPathSum = function (matrix) {
   }
   return result
 };
+
+// ITERable Dp -:
+
+// /**
+//  * @param {number[][]} matrix
+//  * @return {number}
+//  */
+// var minFallingPathSum = function (matrix) {
+//   const n = matrix.length;
+//   const dp = Array.from({ length: n }, () =>
+//     new Array(n).fill(Number.MAX_SAFE_INTEGER)
+//   );
+//   let result = Number.MAX_SAFE_INTEGER;
+//   for (let i = n - 1; i >= 0; i--) {
+//     for (let j = n - 1; j >= 0; j--) {
+//       if (i == n - 1) {
+//         dp[i][j] = matrix[i][j];
+//       } else {
+//         dp[i][j] =
+//           matrix[i][j] +
+//           Math.min(dp[i + 1][j], dp[i + 1][j - 1] || Number.MAX_SAFE_INTEGER , dp[i + 1][j + 1] || Number.MAX_SAFE_INTEGER);
+//       }
+
+//       if (i == 0) {
+//         result = Math.min(result, dp[i][j]);
+//       }
+//     }
+//   }
+//   console.log(dp);
+
+//   return result;
+// };
+
