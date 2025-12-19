@@ -8,11 +8,10 @@
 function solve(n) {
   const dp = new Array(n + 1).fill(-1);
   const dpA = new Array(n + 1).fill(-1);
-  dpA[0] = 0
+  dpA[0] = 0;
   console.log(MinSteps(n, dp));
   console.log("iter");
-  console.log(MinStepsIt( n , dpA))
-  
+  console.log(MinStepsIt(n, dpA));
 }
 // ######## GREEEdy #################
 function largestDigit(n) {
@@ -56,22 +55,42 @@ function MinSteps(n, dp) {
   return dp[n];
 }
 
-// ########### IterativeDp 
-function MinStepsIt( n , dp ){
-  if( n == 0 )return 0
-    for ( let i = 1 ; i <= n ; i++ ){
-        // if(i == 0) continue
-        let temp = i
-        let minSteps = Number.MAX_SAFE_INTEGER
-        while( temp!= 0 ){
-          const digit = temp % 10
-          temp = Math.floor(temp / 10)
-          if ( digit == 0 ) continue
-          minSteps = Math.min(minSteps , dp[i - digit])
-        }
-        dp[i] = minSteps + 1
+// ########### IterativeDp
+function MinStepsIt(n, dp) {
+  if (n == 0) return 0;
+  for (let i = 1; i <= n; i++) {
+    // if(i == 0) continue
+    let temp = i;
+    let minSteps = Number.MAX_SAFE_INTEGER;
+    while (temp != 0) {
+      const digit = temp % 10;
+      temp = Math.floor(temp / 10);
+      if (digit == 0) continue;
+      minSteps = Math.min(minSteps, dp[i - digit]);
     }
-  return dp[n]  
+    dp[i] = minSteps + 1;
+  }
+  return dp[n];
 }
 
-solve(27);
+solve(100);
+
+function minStepsIterative(n) {
+  const dp = new Array(n + 1).fill(Number.MAX_SAFE_INTEGER);
+  dp[0] = 0;
+  for (let i = 1; i <= n; i++) {
+    let temp = i;
+    let min = Number.MAX_SAFE_INTEGER;
+    while (temp != 0) {
+      const dig = temp % 10;
+      min = Math.min(min, dp[i - dig]);
+      temp = Math.floor(temp / 10);
+    }
+    dp[i] = 1 + min;
+  }
+  console.log(dp);
+  
+  return dp[n];
+}
+
+console.log(minStepsIterative(100));

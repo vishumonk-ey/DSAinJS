@@ -41,3 +41,26 @@ function totalPaths(arr, dp, i, j) {
   return dp[i][j];
 }
 solve();
+const grid = [
+  [".", ".", "."],
+  [".", ".", "."],
+  [".", ".", "*"]
+]
+const dp = Array.from({length : grid.length} , () => new Array(grid.length).fill(-1))
+function solution(grid , dp , i , j){
+  if(i == grid.length - 1 && j == grid.length - 1 && grid[i][j] != '*'){
+    return dp[i][j] = 1 
+  }else if ( i >= grid.length || j >= grid.length ){
+    return 0
+  }else{
+    if(dp[i][j] == -1){
+      if(grid[i][j] == '*'){
+        dp[i][j] = 0
+      }else{
+        dp[i][j] = solution(grid , dp , i , j+1) + solution(grid , dp , i+1 , j)
+      }
+    }
+    return dp[i][j]
+  }
+}
+console.log(solution(grid , dp , 0 , 0))

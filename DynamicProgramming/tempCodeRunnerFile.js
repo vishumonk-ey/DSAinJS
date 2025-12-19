@@ -1,1 +1,1 @@
-f( n == 0 ) return 0
+emp %

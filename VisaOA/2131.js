@@ -22,5 +22,9 @@ var longestPalindrome = function (words) {
     }
   }
   const len = pair * 4 + isMiddle * 2;
-  return len
+  return len;
 };
+function ReverseString(str) {
+  const s = str[1] + str[0];
+  return s;
+}
